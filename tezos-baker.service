@@ -2,18 +2,17 @@
 # file: /etc/systemd/system/tezos-baker.service 
 
 [Unit]
-Description     = Tezos Baker Service
-Wants           = network-online.target openvpn-client@<vpnprovider>.service 
-BindsTo		= tezos-node.service
-After           = tezos-node.service
+Description=Tezos Baker Service
+BindsTo=tezos-node.service
+After=tezos-node.service
 
 [Service]
-User            = baker
-Group		= baker
-WorkingDirectory= /home/baker/
-ExecStartPre	= /bin/sleep 1
-ExecStart       = /home/baker/tezos/tezos-baker-004-Pt24m4xi run with local node /home/baker/.tezos-node ledger_bakerone_ed_0_0
-Restart         = on-failure
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/
+ExecStartPre=/bin/sleep 1
+ExecStart=/home/ubuntu/tezos/tezos-baker-004-Pt24m4xi run with local node /home/ubuntu/.tezos-node ledger_bakerone_ed_0_0
+Restart=on-failure
 
 [Install]
-WantedBy	= multi-user.target
+WantedBy=multi-user.target

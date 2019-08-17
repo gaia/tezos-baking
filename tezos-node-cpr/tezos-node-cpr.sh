@@ -8,14 +8,13 @@ LAST_REBOOT=$(date -d "$(who -b | cut -c22-38)" +"%s")
 
 # Networking interface
 # Use "ls -la /sys/class/net/" to see which devices you have avaiable
-NETWORK_INTERFACE="enp1s0" 
-#NETWORK_INTERFACE="wlp2s0"
+NETWORK_INTERFACE="eth0"
 
 # Set RPC parameters
 RPC_HOST=127.0.0.1
 RPC_PORT=8732
 
-# Set timeouts (seconds) 
+# Set timeouts (seconds)
 TIME_TO_WAIT_AFTER_REBOOT=5
 TIME_TO_WAIT_FOR_NETWORK=10
 TIME_TO_WAIT_AFTER_RESTART=60
@@ -53,8 +52,8 @@ if [ $(rpcserverrunning) ]; then
 			sleep $TIME_TO_WAIT_FOR_P2P
 		else
 			# No new block(s) within the defined waiting time; Wait for p2p traffic. If p2p is active; dont panic
-			if [ $(networkconnected) ] && [ $(rpcserverrunning) ]; then 
-				echo $(log "Looking for p2p avtivity - will wait for max $TIME_TO_WAIT_FOR_P2P secs"); 
+			if [ $(networkconnected) ] && [ $(rpcserverrunning) ]; then
+				echo $(log "Looking for p2p avtivity - will wait for max $TIME_TO_WAIT_FOR_P2P secs");
 				TIMEOUT_WAIT_FOR_P2P=$(($(date +"%s")+$TIME_TO_WAIT_FOR_P2P));
 				# Keep looking for new p2p activity until timeout or activity detected
 				while [ $(date +"%s") -lt $TIMEOUT_WAIT_FOR_P2P ] && [ $(networkconnected) ] && [ $(rpcserverrunning) ] && [ $P2P_TX_TOTAL -eq $(getTotalTxp2p) ]; do
@@ -83,4 +82,3 @@ else
 	# No connection to RPC server. Exiting.
 	exit 1
 fi
-

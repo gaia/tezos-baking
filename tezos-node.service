@@ -2,18 +2,16 @@
 # file: /etc/systemd/system/tezos-node.service 
 
 [Unit]
-Description     = Tezos Node Service
-Documentation	  = http://tezos.gitlab.io/betanet/
-Wants           = network-online.target openvpn-client@<vpnprovider>.service
-After           = network-online.target openvpn-client@<vpnprovider>.service 
+Description=Tezos Node Service
+Documentation=http://tezos.gitlab.io/mainnet/
 
 [Service]
-User            = baker
-Group		= baker
-WorkingDirectory= /home/baker/
-ExecStart	= /home/baker/tezos/tezos-node run --bootstrap-threshold=1
-Restart         = on-failure
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/
+ExecStart=/home/ubuntu/tezos/tezos-node run --config-file=/home/ubuntu/.tezos-node/config.json
+Restart=on-failure
 
 [Install]
-WantedBy	= multi-user.target
-RequiredBy	= tezos-baker.service tezos-endorser.service tezos-accuser.service
+WantedBy=multi-user.target
+RequiredBy=tezos-baker.service tezos-endorser.service tezos-accuser.service
