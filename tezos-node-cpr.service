@@ -1,0 +1,15 @@
+# The Tezos Node CPR service (part of systemd)
+# file: /etc/systemd/system/tezos-node-cpr.service
+
+[Unit]
+Description=Tezos Node Moitoring and Restarting Service
+Wants=network-online.target tezos-node.service
+After=tezos-node.service
+
+[Service]
+WorkingDirectory=/home/ubuntu/
+ExecStart=/home/ubuntu/tezos-baking/tezos-node-cpr/tezos-node-cpr.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
