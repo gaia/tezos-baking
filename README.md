@@ -1,3 +1,5 @@
+## Modified to exclude VPN & IPtables related items
+
 ## Tezos baking tools to ease a bakers life<br>Focus on uptime and ease of use / monitoring
 
 If you own Tezos tokens (XTZ), you want them to work for the Tezos network and ecosystem. 
